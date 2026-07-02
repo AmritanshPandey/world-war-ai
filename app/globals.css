@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+:root {
+  --background: #030303;
+  --foreground: #f5f5f0;
+  --muted: #9a9a91;
+  --hud: #d8b35f;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-hud: var(--hud);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(102, 28, 26, 0.22), transparent 28rem),
+    radial-gradient(circle at 86% 14%, rgba(35, 76, 65, 0.18), transparent 26rem),
+    linear-gradient(180deg, #030303 0%, #090908 48%, #030303 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #d8b35f;
+  color: #030303;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.grain-overlay {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain-overlay::after {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  content: "";
+  opacity: 0.12;
+  mix-blend-mode: screen;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.24) 0 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px);
+  background-position:
+    0 0,
+    2px 3px;
+  background-size:
+    4px 4px,
+    7px 7px;
+}
+
+.vignette-overlay {
+  position: relative;
+  isolation: isolate;
+}
+
+.vignette-overlay::before {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(ellipse at center, transparent 28%, rgba(0, 0, 0, 0.46) 74%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.66));
+}
+
+.cinematic-text {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.thin-hud-border {
+  border: 1px solid rgba(216, 179, 95, 0.36);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 28px rgba(216, 179, 95, 0.08);
+}
+
+.swarm-column {
+  filter: drop-shadow(-28px 10px 26px rgba(0, 0, 0, 0.58));
+  background:
+    radial-gradient(ellipse at 35% 10%, rgba(255, 255, 255, 0.12), transparent 18%),
+    radial-gradient(ellipse at 54% 22%, rgba(255, 255, 255, 0.08), transparent 18%),
+    radial-gradient(circle at 42% 48%, rgba(255, 255, 255, 0.04), transparent 18%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.07) 0 1px, transparent 1.5px),
+    linear-gradient(115deg, #010101 0%, #0a0a08 44%, #000 100%);
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+  background-size:
+    auto,
+    auto,
+    auto,
+    13px 15px,
+    auto;
+  clip-path: polygon(
+    47% 0%,
+    57% 5%,
+    64% 13%,
+    68% 23%,
+    72% 35%,
+    82% 48%,
+    94% 64%,
+    100% 100%,
+    18% 100%,
+    22% 82%,
+    27% 66%,
+    31% 49%,
+    35% 31%,
+    40% 12%
+  );
+}
+
+.swarm-column::before,
+.swarm-column::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.swarm-column::before {
+  background:
+    radial-gradient(circle at 46% 8%, rgba(0, 0, 0, 0.92) 0 2px, transparent 3px),
+    radial-gradient(circle at 54% 17%, rgba(0, 0, 0, 0.82) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 39% 28%, rgba(0, 0, 0, 0.88) 0 2px, transparent 3px),
+    radial-gradient(circle at 66% 38%, rgba(0, 0, 0, 0.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 77% 55%, rgba(0, 0, 0, 0.86) 0 1.5px, transparent 2.5px);
+  background-size:
+    29px 37px,
+    31px 43px,
+    23px 29px,
+    37px 41px,
+    19px 27px;
+  opacity: 0.8;
+}
+
+.swarm-column::after {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.55)),
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
+  opacity: 0.3;
+}
+
+.swarm-person {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  aspect-ratio: 0.42;
+  color: #050505;
+  transform-origin: 50% 45%;
+}
+
+.swarm-person::before,
+.swarm-person::after {
+  position: absolute;
+  content: "";
+  background: currentColor;
+}
+
+.swarm-person::before {
+  top: 0;
+  left: 33%;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.swarm-person::after {
+  top: 22%;
+  left: 42%;
+  width: 18%;
+  height: 48%;
+  border-radius: 999px;
+  box-shadow:
+    -0.44em 0.3em 0 -0.12em currentColor,
+    0.44em 0.34em 0 -0.12em currentColor,
+    -0.26em 1.02em 0 -0.08em currentColor,
+    0.28em 1em 0 -0.08em currentColor;
+}
+
+.swarm-person--falling {
+  color: #050505;
+  filter: blur(0.15px);
+}
+
+.swarm-person--ridge {
+  color: #020202;
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.34));
+}
+
+.swarm-person--tower {
+  color: #070707;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
