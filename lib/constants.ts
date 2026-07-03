@@ -10,6 +10,11 @@ export const STORY_SECTIONS = [
     title: "The Outbreak",
   },
   {
+    id: "wall",
+    label: "Wall",
+    title: "The Wall",
+  },
+  {
     id: "observer",
     label: "Observer",
     title: "The Observer",
@@ -20,14 +25,24 @@ export const STORY_SECTIONS = [
     title: "The Pattern",
   },
   {
-    id: "act-two",
-    label: "Act 2",
-    title: "Act Two Placeholder",
+    id: "hypothesis",
+    label: "Hypothesis",
+    title: "Test the Hypothesis",
+  },
+  {
+    id: "protocol",
+    label: "Protocol",
+    title: "Survival Protocol",
+  },
+  {
+    id: "clarity",
+    label: "Clarity",
+    title: "Clarity After Chaos",
   },
   {
     id: "manifesto",
     label: "Manifesto",
-    title: "Final Manifesto Placeholder",
+    title: "Final Manifesto",
   },
 ] as const;
 
