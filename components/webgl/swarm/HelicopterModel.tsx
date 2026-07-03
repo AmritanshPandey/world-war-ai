@@ -243,14 +243,7 @@ export default function HelicopterModel({
       <mesh material={bodyMaterial} position={[1.32, 0.17, 0]}>
         <boxGeometry args={[0.36, 0.028, 0.11]} />
       </mesh>
-      {/* tail skid */}
-      <mesh
-        material={bodyMaterial}
-        position={[1.62, -0.06, 0]}
-        rotation={[0, 0, 0.5]}
-      >
-        <cylinderGeometry args={[0.012, 0.012, 0.14, 6]} />
-      </mesh>
+  
       {/* tail rotor on a gearbox that bridges it to the fin */}
       <mesh material={bodyMaterial} position={[1.8, 0.4, 0.03]}>
         <boxGeometry args={[0.09, 0.09, 0.06]} />
@@ -331,7 +324,7 @@ export default function HelicopterModel({
             position={[-0.88, -0.47, z]}
             rotation={[0, 0, -0.9]}
           >
-            <cylinderGeometry args={[0.015, 0.015, 0.16, 6]} />
+           
           </mesh>
           {[-0.5, 0.2].map((x) => (
             <mesh
