@@ -111,6 +111,18 @@ export default function WebGLOverlay({
   className,
   ...sparkProps
 }: FireSparksLayerProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setIsMounted(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
     <div
       className={cn(
@@ -119,7 +131,7 @@ export default function WebGLOverlay({
       )}
       aria-hidden="true"
     >
-      <CanvasOverlay {...sparkProps} />
+      {isMounted ? <CanvasOverlay {...sparkProps} /> : null}
     </div>
   );
 }

@@ -9,14 +9,14 @@ export default function ManifestoChapter() {
     <section id="manifesto" className="story-slide relative">
       <VideoChapter
         src="/media/3.mp4"
-        logLabel="08 / FINAL MANIFESTO"
+        logLabel="09 / FINAL MANIFESTO"
         variant="quiet"
         className="border-t border-white/10"
       >
         <div className="flex min-h-[62svh] items-center">
           <div className="max-w-3xl text-left">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/45 md:text-xs">
-              08 / FINAL MANIFESTO
+              09 / FINAL MANIFESTO
             </p>
 
             <Reveal>

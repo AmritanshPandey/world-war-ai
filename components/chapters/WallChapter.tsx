@@ -51,7 +51,7 @@ export default function WallChapter() {
             faceY={0.56}
             faceScale={0.54}
             faceIntensity={1.62}
-            faceDelay={1.35}
+            faceDelay={2.2}
             faceFadeIn={0.16}
             faceHold={5.8}
             faceFadeOut={1.45}

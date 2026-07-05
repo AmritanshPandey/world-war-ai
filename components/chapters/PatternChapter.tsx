@@ -1,88 +1,62 @@
 import ChapterShell from "@/components/briefing/ChapterShell";
 import Reveal from "@/components/briefing/Reveal";
+import PatternMeaningLab, {
+  type PatternPair,
+} from "@/components/chapters/PatternMeaningLab";
 
-const AI_ITEMS = [
-  "Options",
-  "Variations",
-  "First drafts",
-  "Prototype velocity",
-  "Production output",
-  "Pattern recall",
-];
-
-const DESIGNER_ITEMS = [
-  "Direction",
-  "Intent",
-  "Taste",
-  "Context",
-  "Priorities",
-  "Meaning",
-];
-
-const BLIND_SPOTS = [
-  "The politics behind a stakeholder decision.",
-  "The emotion behind a customer complaint.",
-  "The strategic reason a product should not exist.",
-  "The difference between something polished and something right.",
-];
-
-function ComparisonColumn({
-  label,
-  items,
-  accent,
-}: {
-  label: string;
-  items: string[];
-  accent: "red" | "white";
-}) {
-  const isRed = accent === "red";
-
-  return (
-    <div>
-      <p
-        className={
-          isRed
-            ? "font-mono text-[11px] uppercase tracking-[0.3em] text-[#d3170c]"
-            : "font-mono text-[11px] uppercase tracking-[0.3em] text-[#f2efe6]"
-        }
-      >
-        {label}
-      </p>
-      <ul className="mt-6">
-        {items.map((item, index) => (
-          <li
-            key={item}
-            className="flex items-baseline gap-4 border-t border-white/10 py-4 last:border-b"
-          >
-            <span
-              className={
-                isRed
-                  ? "font-mono text-[10px] text-[#d3170c]/70"
-                  : "font-mono text-[10px] text-white/40"
-              }
-            >
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span
-              className={
-                isRed
-                  ? "text-lg text-white/60 md:text-xl"
-                  : "title-display text-lg text-[#f2efe6] md:text-xl"
-              }
-            >
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+const PATTERN_PAIRS = [
+  {
+    ai: "Options",
+    designer: "Direction",
+    meaning: "Options become direction when a designer chooses what matters.",
+    blindSpot: "Choice without a point of view.",
+    verdict: "Name the path worth pursuing.",
+  },
+  {
+    ai: "Variations",
+    designer: "Intent",
+    meaning: "Variations become intent when the work has a reason to exist.",
+    blindSpot: "Novelty mistaken for purpose.",
+    verdict: "Protect the reason behind the form.",
+  },
+  {
+    ai: "First drafts",
+    designer: "Taste",
+    meaning: "First drafts become taste when someone knows what to remove.",
+    blindSpot: "Polish without judgment.",
+    verdict: "Remove what feels plausible but wrong.",
+  },
+  {
+    ai: "Prototype velocity",
+    designer: "Context",
+    meaning: "Velocity becomes context when speed still listens to the room.",
+    blindSpot: "Momentum hiding the real constraint.",
+    verdict: "Slow down where the stakes are human.",
+  },
+  {
+    ai: "Production output",
+    designer: "Priorities",
+    meaning: "Output becomes priority when a team can say what comes first.",
+    blindSpot: "More artifacts than decisions.",
+    verdict: "Turn volume into sequence.",
+  },
+  {
+    ai: "Pattern recall",
+    designer: "Meaning",
+    meaning: "Pattern recall becomes meaning when memory meets consequence.",
+    blindSpot: "The room, the politics, the cost.",
+    verdict: "Make sure the right thing gets made.",
+  },
+] satisfies PatternPair[];
 
 export default function PatternChapter() {
   return (
-    <ChapterShell id="pattern" eyebrow="04 / THE PATTERN">
-      {/* organised signal network — chaos resolving into intent */}
+    <ChapterShell
+      id="pattern"
+      eyebrow="04 / THE PATTERN"
+      className="py-20 md:py-20"
+    >
+      {/* organised signal network: chaos resolving into intent */}
       <svg
         aria-hidden="true"
         viewBox="0 0 400 300"
@@ -119,50 +93,15 @@ export default function PatternChapter() {
             </span>
           </h2>
         </Reveal>
-      </div>
-
-      <div className="relative mt-16 grid gap-14 md:mt-24 md:grid-cols-2 md:gap-20">
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-2 left-1/2 hidden w-px bg-gradient-to-b from-transparent via-white/20 to-transparent md:block"
-        />
-        <Reveal>
-          <ComparisonColumn label="AI accelerates" items={AI_ITEMS} accent="red" />
-        </Reveal>
-        <Reveal delay={0.2}>
-          <ComparisonColumn
-            label="Designers decide"
-            items={DESIGNER_ITEMS}
-            accent="white"
-          />
+        <Reveal delay={0.12}>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/64 md:text-lg md:leading-8">
+            AI can propose. But it does not fully understand the room.
+          </p>
         </Reveal>
       </div>
 
-      <Reveal delay={0.15} className="mt-20 max-w-3xl md:mt-28">
-        <p className="text-lg leading-8 text-white/70 md:text-xl md:leading-9">
-          AI can propose. But it does not fully understand the room.
-        </p>
-        <ul className="mt-8 space-y-3">
-          {BLIND_SPOTS.map((line) => (
-            <li
-              key={line}
-              className="flex items-baseline gap-4 text-lg leading-8 text-white/55 md:text-xl md:leading-9"
-            >
-              <span
-                aria-hidden="true"
-                className="h-px w-6 shrink-0 translate-y-[-0.3em] bg-[#d3170c]/70"
-              />
-              {line}
-            </li>
-          ))}
-        </ul>
-      </Reveal>
-
-      <Reveal delay={0.2} className="mt-16 max-w-3xl md:mt-20">
-        <p className="title-display border-l-2 border-[#d3170c] pl-6 text-2xl leading-snug text-[#f2efe6] md:text-3xl">
-          The designer&rsquo;s job is not to make more things. It is to make
-          sure the right thing gets made.
-        </p>
+      <Reveal delay={0.18}>
+        <PatternMeaningLab patterns={PATTERN_PAIRS} />
       </Reveal>
     </ChapterShell>
   );

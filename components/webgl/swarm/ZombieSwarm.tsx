@@ -354,12 +354,17 @@ export default function ZombieSwarm({
           "#include <color_fragment>",
           `#include <color_fragment>
           if (vWorldY > uCut) discard;
+          // Grainy dissolve at the base so the mass melts into the ground crowd
+          // instead of ending in a hard silhouette edge.
+          float baseFade = smoothstep(-3.3, -1.7, vWorldY);
+          float grain = fract(sin(dot(vCorePos.xy, vec2(15.13, 78.23))) * 43758.5453);
+          if (grain > baseFade + 0.04) discard;
           // infection veins crawling through the mass; intensity scroll-driven
           float veinA = sin(vCorePos.y * 12.0 + sin(vCorePos.x * 7.0 + uTime * 0.6) * 2.4 + vCorePos.z * 5.0);
           float veinB = sin(vCorePos.x * 15.0 - vCorePos.y * 9.0 + uTime * 0.45);
           float veins = smoothstep(0.978, 1.0, veinA) * 0.7 + smoothstep(0.987, 1.0, veinB) * 0.5;
           float pulse = 0.7 + 0.3 * sin(uTime * 1.8 + vCorePos.y * 3.0);
-          diffuseColor.rgb += vec3(0.78, 0.09, 0.05) * veins * pulse * uVein;
+          diffuseColor.rgb += vec3(0.78, 0.09, 0.05) * veins * pulse * uVein * baseFade;
           // the mass stirs under the cursor
           float cursorDist = distance(vWorldXY, uCursor);
           float reactGlow = exp(-cursorDist * cursorDist * 2.2) * uCursorGlow;
@@ -533,8 +538,8 @@ export default function ZombieSwarm({
       legLRef.current,
       legRRef.current,
     ];
-    const dark = new THREE.Color("#0b0b0a");
-    const haze = new THREE.Color("#5f564a");
+    const dark = new THREE.Color("#0a0a09");
+    const haze = new THREE.Color("#4a4339");
     const color = new THREE.Color();
 
     zombies.forEach((zombie, index) => {

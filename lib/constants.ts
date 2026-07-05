@@ -5,6 +5,11 @@ export const STORY_SECTIONS = [
     title: "World War AI",
   },
   {
+    id: "brad-pitt",
+    label: "Gerry Lane",
+    title: "Brad Pitt as Gerry Lane",
+  },
+  {
     id: "outbreak",
     label: "Outbreak",
     title: "The Outbreak",
@@ -13,6 +18,11 @@ export const STORY_SECTIONS = [
     id: "wall",
     label: "Wall",
     title: "The Wall",
+  },
+  {
+    id: "mechanism",
+    label: "Mechanism",
+    title: "The Mechanism",
   },
   {
     id: "observer",

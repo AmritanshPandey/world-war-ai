@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { SwarmPointer } from "@/components/webgl/swarm/swarm-core";
 
 const SwarmCanvas = dynamic(
@@ -19,6 +19,26 @@ export default function ZombieSwarmScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
   const pointerRef = useRef<SwarmPointer>({ x: 0, y: 0, active: false });
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Defer the WebGL canvas one tick past hydration, but never depend on rAF
+  // alone — rAF is throttled in background/inactive tabs, which would leave the
+  // hero permanently without its swarm. A timeout guarantees mount either way.
+  useEffect(() => {
+    let frame = 0;
+    const timer = window.setTimeout(() => {
+      setIsMounted(true);
+    }, 0);
+
+    frame = window.requestAnimationFrame(() => {
+      setIsMounted(true);
+    });
+
+    return () => {
+      window.clearTimeout(timer);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -85,7 +105,11 @@ export default function ZombieSwarmScene() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-10 select-none"
     >
-      <SwarmCanvas progressRef={progressRef} pointerRef={pointerRef} />
+      {isMounted ? (
+        <SwarmCanvas progressRef={progressRef} pointerRef={pointerRef} />
+      ) : null}
+      {/* soft ground haze: melts the sharp base of the swarm + crowd into dark */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[26%] bg-[linear-gradient(180deg,transparent_0%,rgba(6,5,4,0.35)_44%,rgba(4,3,3,0.72)_78%,rgba(3,2,2,0.9)_100%)]" />
     </div>
   );
 }

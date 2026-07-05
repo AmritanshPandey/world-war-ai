@@ -158,7 +158,7 @@ export default function AsciiZombieBackground({
   faceX = 0.68,
   faceY = 0.5,
   faceScale = 0.58,
-  faceDelay = 1.1,
+  faceDelay = 2.5,
   faceFadeIn = 0.22,
   faceFadeOut = 1.15,
   faceHold = 4.6,
